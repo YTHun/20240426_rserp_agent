@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="AutoReceipt_PostGresql_Dao">
+
+	<!-- SELECT -->
+<!--	FIXME 추후 select 쿼리 수정 필요-->
+	<select id="AutoReceipt_PostGresql_Dao.getReceiptAuto.select" parameterType="CmMap" resultType="CmResMap">
+		select
+			*
+		from sr_bill_receipt_auto_1 a
+		where a.compcode 		=		#{company_code}
+		and 	a.dancode 		=		#{dan_code}
+		and 	a.dongcode 		=		#{dong_code}
+		and 	a.roomno 			=		#{room_no}
+		and 	a.yyyymm 			=		#{yyyymm}
+-- 		and 	a.rentgbn 		=		#{rent_gbn}
+-- 		and 	a.recgubun 		=		#{rec_gubun}
+-- 		and 	a.bankgubun 	=		#{bank_gubun}
+-- 		and 	a.seqchk 			=		#{seq_chk}
+	</select>
+
+	<!-- INSERT -->
+	<insert id="AutoReceipt_PostGresql_Dao.insertReceiptAuto.insert" parameterType="CmMap">
+		INSERT INTO sr_bill_receipt_auto_1(
+					compcode
+			,   dancode
+			,   dongcode
+			,   roomno
+			,   yyyymm
+			,   rentgbn
+			,   recgubun
+			,   bankgubun
+			,   seqchk
+			,   fixgubun
+			,   receiptgbn
+			,   amount
+			,   autodate
+			,   autogubun
+			,   autoresult
+			,   wdate
+			,   recchk
+			,   rdate
+			,   accountno
+			,   outcode
+			,   incode
+			,   napkiyn
+			,   sunapyn
+			,   resultok
+			,   bigyo
+			,   jijumcode
+			,   accname
+			,   cschkyn
+			,   rectime
+			,   downyn
+			,   downdate
+			,   uprecdate
+			,   recautochk
+			,   sendmoney
+			,   fixyn
+			,   row_input_date
+			,   row_input_emp_no
+			,   row_input_ip
+	 	)
+		VALUES (
+					#{compcode}
+			,   #{dancode}
+			,   TRIM(#{dongcode})
+			,   #{roomno}
+			,   #{yyyymm}
+			,   #{rentgbn}
+			,   #{recgubun}
+			,   #{bankgubun}
+			,   #{seqchk}
+			,   #{fixgubun}
+			,   #{receiptgbn}
+			,   #{amount}::numeric
+			,   #{autodate}
+			,   #{autogubun}
+			,   #{autoresult}
+			,   #{wdate}
+			,   #{recchk}
+			,   TRIM(#{rdate})
+			,   #{accountno}
+			,   #{outcode}
+			,   #{incode}
+			,   #{napkiyn}
+			,   #{sunapyn}
+			,   #{resultok}
+			,   #{bigyo}
+			,   #{jijumcode}
+			,   #{accname}
+			,   #{cschkyn}
+			,   #{rectime}::timestamp
+			,   #{downyn}
+			,   #{downdate}::timestamp
+			,   #{uprecdate}::timestamp
+			,   #{recautochk}
+			,   #{sendmoney}
+			,   #{fixyn}
+			,   now()
+			,   #{userId}
+			,   #{userIp}
+		)
+	</insert>
+
+	<!-- UPDATE -->
+
+	<update id="AutoReceipt_PostGresql_Dao.temp.update" parameterType="CmMap">
+	</update>
+
+	<!-- DELETE -->
+
+
+</mapper>

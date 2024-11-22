@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="AutoReceipt_MsSql_Dao">
+	
+	<!-- SELECT -->
+	<select id="AutoReceipt_MsSql_Dao.getAutoReceiptCnt.select" parameterType="CmMap" resultType="Integer">
+		select	count(1)	as cnt
+		from	AutoReceipt a
+		where	ApplyYN = 'N'
+		AND	 	NOT EXISTS (SELECT 	comp_code
+		    				FROM	ACCT_HIS_EXP
+		    				WHERE	a.dancode	= comp_code
+		    				AND		a.BankGubun	= BANK_CD
+		    				AND 	a.accountno = ACCT_NO
+		    				AND 	a.bigyo 	= EXP_JEOKYO
+		    				)
+		AND		autodate &lt;=  CONVERT(CHAR(8), (DATEADD(DAY,-1, GETDATE())), 112)
+	</select>
+
+	<!-- SELECT -->
+	<select id="AutoReceipt_MsSql_Dao.getAutoReceipt.select" parameterType="CmMap" resultType="CmResMap">
+		select
+				*
+		from	AutoReceipt a
+		where	ApplyYN = 'N'
+		AND	 	NOT EXISTS (SELECT 	comp_code
+		    				FROM	ACCT_HIS_EXP
+		    				WHERE	a.dancode	= comp_code
+		    				AND		a.BankGubun	= BANK_CD
+		    				AND 	a.accountno = ACCT_NO
+		    				AND 	a.bigyo 	= EXP_JEOKYO
+		    				)
+		AND		autodate &lt;=  CONVERT(CHAR(8), (DATEADD(DAY,-1, GETDATE())), 112)
+		order by
+					compcode
+			,		dancode
+			,		dongcode
+			,		roomno
+			,		yyyymm
+			,		rentgbn
+			,		recgubun
+			,		bankgubun
+			,		seqchk
+		OFFSET #{strrows} ROWS FETCH NEXT #{endrows} ROWS ONLY
+	</select>
+
+	<!-- INSERT -->
+	<insert id="AutoReceipt_MsSql_Dao.temp.insert" parameterType="CmMap">
+	</insert>
+
+	<!-- UPDATE -->
+
+	<update id="AutoReceipt_MsSql_Dao.updateReceiptAuto.update" parameterType="CmMap">
+		update AutoReceipt
+		set		ApplyYN			=	'Y'
+			,	ApplyDate		=	getdate()
+		where 	compcode		=	#{compcode}
+		and		dancode			=	#{dancode}
+		and		dongcode		=	#{dongcode}
+		and		roomno			=	#{roomno}
+		and		yyyymm			=	#{yyyymm}
+		and		rentgbn			=	#{rentgbn}
+		and		recgubun		=	#{recgubun}
+		and		bankgubun		=	#{bankgubun}
+		and		seqchk			=	#{seqchk}
+	</update>
+
+	<!-- DELETE -->
+
+	<!-- INSERT -->
+	<insert id="AutoReceipt_MsSql_Dao.insertAcctHisExp.insert" parameterType="CmMap">
+		DELETE
+		FROM	RSERP.dbo.ACCT_HIS_EXP
+		WHERE	COMP_GB		= #{comp_gb}
+		AND		COMP_CODE	= #{comp_code}
+		AND		BANK_CD		= #{bank_cd}
+		AND		ACCT_NO		= #{acct_no}
+		;
+		INSERT INTO RSERP.dbo.ACCT_HIS_EXP( COMP_GB
+                                          , COMP_CODE
+                                          , BANK_CD
+                                          , ACCT_NO
+                                          , EXP_JEOKYO
+                                          , Wdate)
+									VALUES( #{comp_gb}
+										
+									      ,	#{comp_code}
+									      ,	#{bank_cd}
+									      ,	#{acct_no}
+									      ,	#{exp_jeokyo}
+										  , getdate()
+									      );
+	</insert>
+	
+	<update id="AutoReceipt_MsSql_Dao.updateAcctHisExp.update" parameterType="CmMap">
+		UPDATE	RSERP.dbo.ACCT_HIS_EXP SET EXP_JEOKYO = #{exp_jeokyo}
+		WHERE	COMP_GB		= #{comp_gb}
+		AND		COMP_CODE	= #{comp_code}
+		AND		BANK_CD		= #{bank_cd}
+		AND		ACCT_NO		= #{acct_no}
+	</update>
+	
+	<!-- DELETE -->
+	<delete id="AutoReceipt_MsSql_Dao.deleteAcctHisExp.delete" parameterType="CmMap" >
+  		DELETE
+  		FROM	RSERP.dbo.ACCT_HIS_EXP
+	    WHERE	COMP_GB		= #{comp_gb}
+	  	AND		COMP_CODE	= #{comp_code}
+	  	AND		BANK_CD		= #{bank_cd}
+	  	AND		ACCT_NO		= #{acct_no}
+  		;
+	</delete>
+</mapper>

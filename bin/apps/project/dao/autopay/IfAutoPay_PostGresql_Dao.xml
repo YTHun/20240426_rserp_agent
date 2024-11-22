@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="ifAutoPay_Dao">
+
+	<!-- SELECT -->
+	<select id="ifAutoPay_Dao.getDanjiInfo.select" parameterType="CmMap" resultType="CmResMap">
+	</select>
+
+	<!-- INSERT -->
+	<insert id="ifAutoPay_Dao.insertAutoPay.insert" parameterType="CmMap">
+		INSERT INTO apart.if_autopay(
+					comp_gb
+		  ,   dancode
+		  ,   dongcode
+		  ,   roomno
+		  ,   gojicode
+		  ,   accountno
+		  ,   admincode
+		  ,   bankname
+		  ,   depositname
+		  ,   reckind
+		  ,   recbank
+		  ,   reqdate
+		  ,   reqkind
+		  ,   row_input_date
+		  ,   row_input_emp_no
+		  ,   row_input_ip
+		  ,   row_update_date
+		  ,   row_update_emp_no
+		  ,   row_update_ip
+		)
+		VALUES(
+					#{company_code}
+		  ,   #{dangi_code}
+		  ,   #{dong_code}
+		  ,   #{room_no}
+		  ,   #{goji_code}
+		  ,   #{account_no}
+		  ,   #{admin_code}
+		  ,   #{bank_name}
+		  ,   #{deposit_name}
+		  ,   #{rec_kind}
+		  ,   #{rec_bank}
+		  ,   #{req_date}
+		  ,   #{req_kind}
+		  ,   now()
+		  ,   '오정현'
+		  ,   '1.0.0.0.0.0'
+		  ,   now()
+			,   '오정현'
+			,   '1.0.0.0.0.0'
+		);
+	</insert>
+
+	<!-- UPDATE -->
+
+	<update id="ifAutoPay_Dao.temp.update" parameterType="CmMap">
+	</update>
+
+	<!-- DELETE -->
+
+
+</mapper>

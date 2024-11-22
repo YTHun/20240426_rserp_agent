@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="MstVa_MsSql_Dao">
+
+	<!-- SELECT -->
+	<select id="MstVa_MsSql_Dao.getMstVaDanCnt.select" parameterType="CmMap" resultType="Integer">
+		SELECT	count(1)	as cnt
+		FROM	MSTvaDANCODE
+		;
+	</select>
+	
+	<!-- SELECT -->
+	<select id="MstVa_MsSql_Dao.getMstVaDan.select" parameterType="CmMap" resultType="CmResMap">
+		SELECT  dancode
+		    ,   bankcode
+		    ,   bankSn
+		    ,   srvname
+		    ,   roomtot
+		    ,   rent
+		    ,   apply_date
+		    ,   pb_ucode
+		    ,   agent
+		    ,   its_auto
+		FROM    MSTvaDANCODE
+		ORDER BY dancode, bankcode
+		OFFSET #{strrows} ROWS FETCH NEXT #{endrows} ROWS ONLY
+		;
+	</select>
+	
+	<!-- SELECT -->
+	<select id="MstVa_MsSql_Dao.getMstVaMemCnt.select" parameterType="CmMap" resultType="Integer">
+		SELECT	count(1)	as cnt
+		FROM	MSTvaMEMBER
+		;
+	</select>
+	
+	<!-- SELECT -->
+	<select id="MstVa_MsSql_Dao.getMstVaMem.select" parameterType="CmMap" resultType="CmResMap">
+		SELECT  dancode
+		    ,   dongcode
+		    ,   roomno
+		    ,   bankcode
+		    ,   vaccount
+		    ,   usedate
+		    ,   send
+		FROM MSTvaMEMBER
+		ORDER BY dancode, dongcode, roomno, bankcode, vaccount
+		OFFSET #{strrows} ROWS FETCH NEXT #{endrows} ROWS ONLY
+	</select>
+
+	<!-- INSERT -->
+	<insert id="MstVa_MsSql_Dao.temp.insert" parameterType="CmMap">
+	</insert>
+
+	<!-- UPDATE -->
+	<!-- DELETE -->
+	
+</mapper>

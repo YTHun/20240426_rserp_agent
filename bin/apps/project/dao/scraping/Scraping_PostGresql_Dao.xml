@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="Scraping_PostGresql_Dao">
+
+	<!-- 홈택스 스크래핑 세금계산서 -->
+	<insert id="Scraping_PostGresql_Dao.scrap_ETAXBILL.insert" parameterType="CmMap">
+		INSERT into	account.at_slip_hometax
+				(	company_code
+				,	proj_code
+				,	sell_code
+				,	slip_gbn
+				,	apply_no
+				,	sale_gbn
+				,	work_date
+				,	issue_date
+				,	send_date
+				,	supp_amt
+				,	vat_amt
+				,	tot_amt
+				,	item_name
+				,	biz_no
+				,	biz_name
+				,	biz_owner
+				,	issue_gbn
+				,	remarks
+				,	row_input_date
+				,	row_input_emp_no
+				,	row_input_ip		)
+		values	(	#{company_code}
+				,	#{proj_code}
+				,	#{sell_code}
+				,	#{slip_gbn}
+				,	#{apply_no}
+				,	#{sale_gbn}
+				,	#{work_date}
+				,	#{issue_date}
+				,	#{send_date}
+				,	#{supp_amt}::numeric
+				,	#{vat_amt}::numeric
+				,	#{tot_amt}::numeric
+				,	#{item_name}
+				,	#{biz_no}
+				,	#{biz_name}
+				,	#{biz_owner}
+				,	#{issue_gbn}
+				,	#{remarks}
+				,	now()
+				,	'ScrapService'
+				,	''		)
+		ON CONFLICT ON CONSTRAINT at_slip_hometax_pkey
+		DO NOTHING;
+	</insert>
+
+
+	<!-- 홈택스 스크래핑 현금영수증 -->
+	<insert id="Scraping_PostGresql_Dao.scrap_CASHBILL.insert" parameterType="CmMap">
+		INSERT into	account.at_slip_hometax
+				(	company_code
+				,	proj_code
+				,	sell_code
+				,	slip_gbn
+				,	apply_no
+				,	sale_gbn
+				,	work_date
+				,	supp_amt
+				,	vat_amt
+				,	tot_amt
+				,	issue_gbn
+				,	tr_class
+				,	remarks
+				,	row_input_date
+				,	row_input_emp_no
+				,	row_input_ip		)
+		values	(	#{company_code}
+				,	#{proj_code}
+				,	#{sell_code}
+				,	#{slip_gbn}
+				,	#{apply_no}
+				,	#{sale_gbn}
+				,	#{work_date}
+				,	#{supp_amt}::numeric
+				,	#{vat_amt}::numeric
+				,	#{tot_amt}::numeric
+				,	#{issue_gbn}
+				,	#{tr_class}
+				,	#{remarks}
+				,	now()
+				,	'ScrapService'
+				,	''		)
+		ON CONFLICT ON CONSTRAINT at_slip_hometax_pkey
+		DO NOTHING;
+	</insert>
+
+
+	<!-- 홈택스 스크래핑 신용카드(월) -->
+	<insert id="Scraping_PostGresql_Dao.scrap_CREDIT_CARD.insert" parameterType="CmMap">
+		INSERT into	account.at_slip_hometax
+				(	company_code
+				,	proj_code
+				,	sell_code
+				,	slip_gbn
+				,	apply_no
+				,	sale_gbn
+				,	work_date
+				,	supp_amt
+				,	vat_amt
+				,	tot_amt
+				,	remarks
+				,	row_input_date
+				,	row_input_emp_no
+				,	row_input_ip		)
+		values	(	#{company_code}
+				,	#{proj_code}
+				,	#{sell_code}
+				,	#{slip_gbn}
+				,	#{apply_no}
+				,	#{sale_gbn}
+				,	#{work_date}
+				,	#{supp_amt}::numeric
+				,	#{vat_amt}::numeric
+				,	#{tot_amt}::numeric
+				,	#{remarks}
+				,	now()
+				,	'ScrapService'
+				,	''		)
+		ON CONFLICT ON CONSTRAINT at_slip_hometax_pkey
+		DO NOTHING;
+	</insert>
+
+
+
+</mapper>

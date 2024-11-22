@@ -1,0 +1,36 @@
+
+k	java:S117I"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ĞÉÄ°úÿÿÿÿ
+k	java:S117O"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®Ùûÿÿÿÿ
+f	java:S117P"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×å“Ï
+k	java:S117R"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹õ£İüÿÿÿÿ
+f	java:S117^"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡âü¿
+J
+java:S3740L"/Provide the parametrized type for this generic.(®†Àÿıÿÿÿÿ
+J
+java:S3740O"/Provide the parametrized type for this generic.(®Ùûÿÿÿÿ
+P	java:S125""<This block of commented-out lines of code should be removed.(Êšâq
+m
+java:S3776'"RRefactor this method to reduce its Cognitive Complexity from 85 to the 15 allowed.(ş±­ ûÿÿÿÿ
+M
+java:S1135("2Complete the task associated to this TODO comment.(» æÿÿÿÿÿ
+Q	java:S125K"<This block of commented-out lines of code should be removed.(Â‚´û
+Q	java:S125Q"<This block of commented-out lines of code should be removed.(Û›¬›
+V	java:S125V"<This block of commented-out lines of code should be removed.(§Çˆìøÿÿÿÿ
+d
+java:S1858e"I"f_temp" is already a string, there's no need to call "toString()" on it.(ÁèÉÇüÿÿÿÿ
+Q	java:S125u"<This block of commented-out lines of code should be removed.(ŠÛåÚ
+R	java:S125Š"<This block of commented-out lines of code should be removed.(¾–Á©
+H
+java:S3011",This accessibility update should be removed.(ºçÃÚşÿÿÿÿ
+N
+java:S1135°"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿ
+N
+java:S1135¶"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿ
+V
+java:S1128"@Remove this unused import 'org.apache.logging.log4j.LogManager'.(Ë”Ëé
+W
+java:S1128"<Remove this unused import 'org.apache.logging.log4j.Logger'.(»¯øÿÿÿÿ
+O
+java:S1128"9Remove this unused import 'apps.project.batch.TaskBatch'.(Ñæ×°
+â
+java:S6541'"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 84 to 64, Complexity from 21 to 14, Nesting Level from 11 to 2, Number of Variables from 25 to 6.(ş±­ ûÿÿÿÿ

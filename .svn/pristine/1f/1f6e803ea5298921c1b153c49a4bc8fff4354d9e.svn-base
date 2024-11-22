@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="AutoReceipt_PostGresql_Dao">
+
+	<!-- SELECT -->
+	<select id="AutoReceipt_PostGresql_Dao.getReceiptAutoJy.select" parameterType="CmMap" resultType="CmResMap">
+		SELECT	a.company_code	as company_code
+		    ,	a.proj_code		as proj_code
+		    ,	a.sell_code		as sell_code
+		    ,	'A'				as comp_gb
+			,	b.proj_bill		as comp_code
+			,	a.bank_cd		as bank_cd
+			,	a.acct_no		as acct_no
+			,	a.jeokyo		as exp_jeokyo
+			,	a.status		as status
+		FROM	sr_bill_receipt_auto_jy a
+				INNER JOIN	se_code_proj b
+						ON	a.company_code	= b.company_code
+					   AND	a.proj_code		= b.proj_code
+		WHERE	a.status	!= 'N'
+		AND		b.proj_bill IS NOT NULL
+		;
+	</select>
+	
+	<update id="AutoReceipt_PostGresql_Dao.getReceiptAutoJy.update" parameterType="CmMap">
+		UPDATE	sr_bill_receipt_auto_jy SET status = 'N'
+		WHERE	company_code	= #{company_code}
+		AND		proj_code		= #{proj_code}
+		AND		sell_code		= #{sell_code}
+		AND		bank_cd			= #{bank_cd}
+		AND		acct_no			= #{acct_no}
+		;
+	</update>
+	
+	<select id="AutoReceipt_PostGresql_Dao.getReceiptAuto.select" parameterType="CmMap" resultType="CmResMap">
+		select	case when count(1) > 0 then 'Y' else 'N' end 		as chk
+		from	sr_bill_receipt_auto a
+		where 	compcode		=	#{compcode}
+		and		dancode			=	#{dancode}
+		and		dongcode		=	TRIM(#{dongcode})
+		and		roomno			=	#{roomno}
+		and		yyyymm			=	#{yyyymm}
+		and		rentgbn			=	#{rentgbn}
+		and		recgubun		=	#{recgubun}
+		and		bankgubun		=	#{bankgubun}
+		and		seqchk			=	#{seqchk}
+	</select>
+
+	<!-- INSERT -->
+	<insert id="AutoReceipt_PostGresql_Dao.insertReceiptAuto.insert" parameterType="CmMap">
+		<selectKey keyProperty="receipt_seq" order="BEFORE" resultType="java.lang.Integer">
+  			SELECT nextval('sr_bill_receipt_auto_receipt_seq_seq'::regclass)
+  		</selectKey>
+		INSERT INTO sr_bill_receipt_auto(
+				compcode
+			,   dancode
+			,   dongcode
+			,   roomno
+			,   yyyymm
+			,   rentgbn
+			,   recgubun
+			,   bankgubun
+			,   seqchk
+			,   fixgubun
+			,   receiptgbn
+			,   amount
+			,   autodate
+			,   autogubun
+			,   autoresult
+			,   wdate
+			,   recchk
+			,   rdate
+			,   accountno
+			,   outcode
+			,   incode
+			,   napkiyn
+			,   sunapyn
+			,   resultok
+			,   bigyo
+			,	receipt_rmk
+			,   jijumcode
+			,   accname
+			,   cschkyn
+			,   rectime
+			,   downyn
+			,   downdate
+			,   uprecdate
+			,   recautochk
+			,   sendmoney
+			,   fixyn
+			,	pcode
+			,	receipt_seq
+			,   row_input_date
+			,   row_input_emp_no
+			,   row_input_ip
+	 	)
+		VALUES (
+				#{compcode}
+			,   TRIM(#{dancode})
+			,   TRIM(#{dongcode})
+			,   TRIM(#{roomno})
+			,   #{yyyymm}
+			,   #{rentgbn}
+			,   #{recgubun}
+			,   #{bankgubun}
+			,   #{seqchk}
+			,   #{fixgubun}
+			,   #{receiptgbn}
+			,   #{amount}::numeric
+			,   #{autodate}
+			,   #{autogubun}
+			,   #{autoresult}
+			,   #{wdate}
+			,   #{recchk}
+			,   TRIM(#{rdate})
+			,   #{accountno}
+			,   #{outcode}
+			,   #{incode}
+			,   #{napkiyn}
+			,   #{sunapyn}
+			,   #{resultok}
+			,   #{bigyo}
+			,   #{bigyo}
+			,   #{jijumcode}
+			,   #{accname}
+			,   #{cschkyn}
+			,   #{rectime}::timestamp
+			,   #{downyn}
+			,   #{downdate}::timestamp
+			,   #{uprecdate}::timestamp
+			,   #{recautochk}
+			,   #{sendmoney}
+			,   #{fixyn}
+			,	#{pcode}
+		  	,	#{receipt_seq}::bigint
+			,   now()
+			,   #{userId}
+			,   #{userIp}
+		)
+  		;
+		INSERT INTO	if_autoreceipt
+		SELECT	*
+		FROM	sr_bill_receipt_auto
+		WHERE	receipt_seq	= #{receipt_seq}
+		;
+	</insert>
+
+	<!-- UPDATE -->
+	<update id="AutoReceipt_PostGresql_Dao.updateReceiptAuto.update" parameterType="CmMap">
+		update	sr_bill_receipt_auto	set pcode 		= #{pcode}
+		                            	,	amount		= CASE WHEN #{pcode} = 'M' THEN #{amount}::numeric ELSE amount END
+		                            	,	recautochk	= 'N'
+		where 	compcode		=	#{compcode}
+		and		dancode			=	#{dancode}
+		and		dongcode		=	#{dongcode}
+		and		roomno			=	#{roomno}
+		and		yyyymm			=	#{yyyymm}
+		and		rentgbn			=	#{rentgbn}
+		and		recgubun		=	#{recgubun}
+		and		bankgubun		=	#{bankgubun}
+		and		seqchk			=	#{seqchk}
+	</update>
+
+	<!-- DELETE -->
+
+</mapper>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="AutoPay_MsSql_Dao">
+
+	<!-- SELECT -->
+	<select id="AutoPay_MsSql_Dao.getAutoPayCnt.select" parameterType="CmMap" resultType="Integer">
+		SELECT	count(1)	as cnt
+		FROM	AUTOPAY
+	</select>
+	
+	<!-- SELECT -->
+	<select id="AutoPay_MsSql_Dao.getAutoPayDelCnt.select" parameterType="CmMap" resultType="Integer">
+		SELECT	count(1)	as cnt
+		FROM	AUTOPAY_DELETE
+		WHERE	dancode = #{dancode}
+	</select>
+	
+	<!-- SELECT -->
+	<select id="AutoPay_MsSql_Dao.getAutoPay.select" parameterType="CmMap" resultType="CmResMap">
+		SELECT	dancode
+			,	dongcode
+			,	roomno
+			,	gojicode
+			,	master.dbo.xdb_fsdec('normal',accountno)	as accountno
+			,	admincode
+			,	bankname
+			,	depositname
+			,	RecKind
+			,	RecBank
+			,	ReqDate
+			,	ReqKind
+			,	WDate
+		FROM	AUTOPAY
+		ORDER BY 	dancode, dongcode, roomno, gojicode, accountno, admincode
+		OFFSET #{strrows} ROWS FETCH NEXT #{endrows} ROWS ONLY
+	</select>
+	
+	<!-- SELECT -->
+	<select id="AutoPay_MsSql_Dao.getAutoPayDel.select" parameterType="CmMap" resultType="CmResMap">
+		SELECT	dancode
+			,	dongcode
+			,	roomno
+			,	gojicode
+			,	master.dbo.xdb_fsdec('normal',accountno)	as accountno
+			,	admincode
+			,	bankname
+			,	depositname
+			,	RecKind
+			,	RecBank
+			,	ReqDate
+			,	ReqKind
+			,	DelDate
+		FROM	AUTOPAY_DELETE
+		WHERE	dancode = #{dancode}
+		ORDER BY 	dancode, dongcode, roomno, gojicode, accountno, admincode
+		OFFSET #{strrows} ROWS FETCH NEXT #{endrows} ROWS ONLY
+	</select>
+
+	<!-- INSERT -->
+	<insert id="AutoPay_MsSql_Dao.temp.insert" parameterType="CmMap">
+	</insert>
+
+	<!-- UPDATE -->
+
+	<update id="AutoPay_MsSql_Dao.AutoPay.update" parameterType="CmMap">
+	</update>
+
+	<!-- DELETE -->
+
+
+</mapper>

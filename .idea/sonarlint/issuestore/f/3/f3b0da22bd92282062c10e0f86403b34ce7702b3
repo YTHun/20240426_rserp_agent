@@ -1,0 +1,14 @@
+
+†	java:S1123"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿJ$6dff8e73-353c-48c7-b3b9-a8dea34adc6f
+†	java:S1126"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$643bb338-09c1-4e0f-abe2-dabb08ec7d00
+w	java:S125#"<This block of commented-out lines of code should be removed.(Øì™ŽJ$d9d4255a-63c1-4008-b644-3df0baae0a3d
+s
+java:S1135!"2Complete the task associated to this TODO comment.(¸çÛåúÿÿÿÿJ$d5e0bc7f-4cc8-4f12-baac-e3b8fc1e771f
+‚
+java:S19893"AHandle the "RuntimeException" thrown here in a "try/catch" block.(¼ÿ¾¹ÿÿÿÿÿJ$dedfc825-e42e-4524-8f81-8605abe6911b
+‚
+java:S19896"AHandle the "RuntimeException" thrown here in a "try/catch" block.(Ò‚ÒéüÿÿÿÿJ$a9efbf5e-6f7d-4081-b234-4359c53535ce
+‘
+java:S19898"PHandle the following exception that could be thrown by "getWriter": IOException.(ç€áþúÿÿÿÿJ$1e929b25-4044-4ca4-8f8a-bdedb59a8c5d
+™
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(ãß„úÿÿÿÿJ$6c7715cc-da19-4eb0-a39f-88bd4140c2d0

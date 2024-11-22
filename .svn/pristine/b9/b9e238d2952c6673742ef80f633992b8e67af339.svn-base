@@ -1,0 +1,30 @@
+
+# FIXME: 정확한 경로 입력
+
+JAR_AGENT_HOME=/cms_4_ezrems_java_dev/bin
+JAR_AGENT=${JAR_AGENT_HOME}/zeonsCmsAgent.jar
+JAVA_RUN=/usr/local/jdk1.6.0_23/bin/java
+
+
+CLASSPATH=.:${FILE_AGENT_HOME}/lib/*:${JAR_AGENT}
+
+RUN_COUNT=`ps -ef  | grep ${FILE_AGENT} | grep -v grep | grep -vc vi`
+
+
+if [ "$1" == "start" ] ; then 
+   
+   ${JAVA_RUN} -cp ${CLASSPATH}:. -jar ${JAR_AGENT} &
+
+elif [ "$1" == "stop" ] ; then 
+   
+   killall ${JAR_AGENT}
+
+else 
+    echo "Usage: cmsAgent.sh (command ...) "
+    echo "commands :"
+    echo "---------------------------------------------------"
+    echo "  start       Start ZeonsCmsAgent "
+    echo "  stop        Stop  ZeonsCmsAgent "
+    echo "---------------------------------------------------"
+
+fi

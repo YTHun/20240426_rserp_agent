@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="Scraping_MsSql_Dao">
+
+	<!-- 세금계산서 -->
+	<select id="Scraping_MsSql_Dao.ETAXBILL_RESULT_TB.select" parameterType="CmMap" resultType="CmResMap">
+		select	menu								as slip_gbn		-- 구분(etaxbill-전자세금계잔서,ebill-전자계산서,cashbill-현금영수증,creditcard-신용카드)
+			,	etan								as apply_no		-- 승인번호
+			,	TYPE								as sale_gbn		-- P매입/S매출
+			,	replace(wrtDt,'-','')				as work_date	-- 작성일자
+			,	replace(isnDtm,'-','')				as issue_date	-- 발급일자
+			,	replace(tmsnDt,'-','')				as send_date	-- 전송일자
+			,	lsatSplCft							as supp_amt		-- 공급가액
+			,	lsatTxamt							as vat_amt		-- 부가세액
+			,	totaAmt								as tot_amt		-- 합계금액
+			,	lsatNm								as item_name	-- 품목
+			,	replace(dmnrTxprDscmNo,'-','')		as biz_no		-- 사업자번호
+			,	tnMNm								as biz_name		-- 상호
+			,	rprsFnm								as biz_owner	-- 대표자
+			,	IsnTypeCd							as issue_gbn	-- 발급수단
+			,	null								as remarks		-- 비고
+		from	RSERP.dbo.ETAXBILL_RESULT_TB
+		where	DAN_BIZNO	=		#{s_bizno}
+		and		wrtDt		&gt;=	#{s_frdt}
+		and		wrtDt		&lt;=	#{s_todt}
+	</select>
+
+	
+	<!-- 현금영수증 -->
+	<select id="Scraping_MsSql_Dao.CASHBILL_RESULT_TB.select" parameterType="CmMap" resultType="CmResMap">
+		select	menu								as slip_gbn		-- 구분(etaxbill-전자세금계잔서,ebill-전자계산서,cashbill-현금영수증,creditcard-신용카드)
+			,	aprvNo								as apply_no		-- 승인번호
+			,	TYPE								as sale_gbn		-- P매입/S매출
+			,	replace(trsDt,'-','')				as work_date	-- 작성일자
+			,	splCft								as supp_amt		-- 공급가액
+			,	vaTxamt								as vat_amt		-- 부가세액
+			,	totaTrsAmt							as tot_amt		-- 합계금액
+			,	spstCnfrClNm						as issue_gbn	-- 발급수단
+			,	trsClNm								as tr_class		-- 처리구분
+			,	null								as remarks		-- 비고
+		from	RSERP.dbo.CASHBILL_RESULT_TB
+		where	DAN_BIZNO	=		#{s_bizno}
+		and		trsDt		&gt;=	#{s_frdt}
+		and		trsDt		&lt;=	#{s_todt}
+	</select>
+
+
+	<!-- 신용카드 -->
+	<select id="Scraping_MsSql_Dao.CREDIT_CARD_RESULT_TB.select" parameterType="CmMap" resultType="CmResMap">
+		select	menu								as slip_gbn		-- 구분(etaxbill-전자세금계잔서,ebill-전자계산서,cashbill-현금영수증,creditcard-신용카드)
+			,	menu+'-'+stlYm						as apply_no		-- 승인번호
+			,	'S'									as sale_gbn		-- P매입/S매출
+			,	stlYm								as work_date	-- 작성일자
+			,	null								as supp_amt		-- 공급가액
+			,	null								as vat_amt		-- 부가세액
+			,	totaStlAmt							as tot_amt		-- 합계금액
+			,	null								as remarks		-- 비고
+		from	RSERP.dbo.CREDIT_CARD_RESULT_TB
+		where	DAN_BIZNO	=		#{s_bizno"}
+		and		stlYm		&gt;=	substring(replace(#{s_frdt},'-',''),1,6)
+		and		stlYm		&lt;=	substring(replace(#{s_todt},'-',''),1,6)
+	</select>
+	
+
+</mapper>

@@ -1,0 +1,36 @@
+
+
+* agent 업데이트 방법: jar 덮어쓰기 /* 2023.05.22 youn 수정 */
+1. 전체 프로젝트 폴더에서  export > java > jar file
+2. Select the resources to export 왼쪽 트리 펼친 후 src 제외 모두 체크 해제 
+3. Select the resources to export 오른쪽 모두 체크 해제
+4. Select the export destination : jar 파일 생성할 위치 선택 후 파일 명은 HomedotAgent.jar 로 생성 
+5. 생성한 HomedotAgent.jar 를 D:\homedot_agent\bin 에 덮어쓴다.
+6. 작업관리자 > 서비스 > HomedotAgent 재가동 
+
+/* 2023.05.22 youn 수정  이전 배포법
+이클립스 export > jar 에서 src 폴더만 선택 후 export
+HomedotAgent.jar
+
+이 파일을 서버의 D:\homedot_agent\bin 에 덮어쓴다.*/
+
+
+* 서비스 등록
+cmd
+nssm win64 폴더로 이동
+nssm install HomedotAgentJavaService "D:\homedot_agent\bin\agent.bat"
+nssm start HomedotAgenttJavaService
+
+이후에는 jar 만 덮어쓰고 서비스 재시작
+
+* 서비스 삭제
+cmd
+sc delete HomedotAgentJavaService
+
+재가동 방법 : bin폴더 아래서 
+./agent.sh stop
+./agent.sh start
+/app/homedot_agent/agent.sh stop, /app/homedot_agent/agent.sh start
+
+로그 : log폴더 아래서
+tail -f agent.log

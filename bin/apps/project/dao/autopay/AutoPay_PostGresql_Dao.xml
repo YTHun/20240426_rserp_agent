@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="AutoPay_PostGresql_Dao">
+
+	<!-- SELECT -->
+	<select id="AutoPay_PostGresql_Dao.getDanCode.select" parameterType="CmMap" resultType="CmResMap">
+		SELECT	dancode
+		FROM	if_autopay
+		WHERE	comp_gb = #{comp}
+		GROUP BY dancode
+		ORDER BY LPAD(dancode, 4, '0')
+	</select>
+
+	<!-- INSERT -->
+	<insert id="AutoPay_PostGresql_Dao.insertAutoPay.insert" parameterType="CmMap">
+		INSERT INTO apart.if_autopay(
+				comp_gb
+		  	,   dancode
+		  	,   dongcode
+		  	,   roomno
+		  	,   gojicode
+		  	,   accountno
+		  	,   admincode
+		  	,   bankname
+		  	,   depositname
+		  	,   reckind
+		  	,   recbank
+		  	,   reqdate
+		  	,   reqkind
+		  	,	wdate
+		  	,   row_input_date
+		  	,   row_input_emp_no
+		  	,   row_input_ip
+		  	,   row_update_date
+		  	,   row_update_emp_no
+		  	,   row_update_ip
+			)
+		VALUES(
+		        #{comp}
+		  	,   #{dancode}
+		  	,   #{dongcode}
+		  	,   #{roomno}
+		  	,   #{gojicode}
+		  	,   #{accountno}
+		  	,   #{admincode}
+		  	,   #{bankname}
+		  	,   #{depositname}
+		  	, 	#{RecKind}
+		  	,   #{RecBank}
+		  	,   #{ReqDate}
+		  	,   #{ReqKind}
+		  	,	now()
+		  	,   now()
+		  	,   'rs_agent'
+		  	,   '1.0.0.0.0.0'
+		  	,   now()
+			,   'rs_agent'
+			,   '1.0.0.0.0.0'
+		);
+	</insert>
+	
+	<!-- UPDATE -->
+	<!-- DELETE -->
+	
+	<delete id="AutoPay_PostGresql_Dao.deleteAutoPay.delete" parameterType="CmMap">
+		DELETE FROM apart.if_autopay;
+	</delete>
+	
+	<!-- INSERT -->
+	<insert id="AutoPay_PostGresql_Dao.insertAutoPayList.insert" parameterType="java.util.HashMap">
+		INSERT INTO apart.if_autopay(
+				comp_gb
+		  	,   dancode
+		  	,   dongcode
+		  	,   roomno
+		  	,   gojicode
+		  	,   accountno
+		  	,   admincode
+		  	,   bankname
+		  	,   depositname
+		  	,   reckind
+		  	,   recbank
+		  	,   reqdate
+		  	,   reqkind
+		  	,	wdate
+		  	,   row_input_date
+		  	,   row_input_emp_no
+		  	,   row_input_ip
+		  	,   row_update_date
+		  	,   row_update_emp_no
+		  	,   row_update_ip
+			)
+		VALUES
+		    <foreach collection="list" item="item" index="index" separator=",">
+		    (
+				#{item.comp}
+		  	,	TRIM(#{item.dancode})::text
+		  	,   TRIM(#{item.dongcode})::text
+		  	,   #{item.roomno}
+		  	,   TRIM(#{item.gojicode})::text
+		  	,   TRIM(#{item.accountno})::text
+		  	,   TRIM(#{item.admincode})::text
+		  	,   TRIM(#{item.bankname})::text
+		  	,   TRIM(#{item.depositname})::text
+		  	, 	#{item.RecKind}
+		  	,   #{item.RecBank}
+		  	,   #{item.ReqDate}
+		  	,   #{item.ReqKind}
+		  	,	now()
+		  	,   now()
+		  	,   'Agent'
+		  	,   '1.0.0.0.0.0'
+		  	,   now()
+			,   'Agent'
+			,   '1.0.0.0.0.0'
+			)
+			</foreach>
+		;
+	</insert>
+
+	<!-- DELETE -->
+	<delete id="AutoPay_PostGresql_Dao.deleteAutoPayDel.delete" parameterType="CmMap">
+		DELETE FROM apart.if_autopay_del;
+	</delete>
+	
+	<!-- INSERT -->
+	<insert id="AutoPay_PostGresql_Dao.insertAutoPayDelList.insert" parameterType="java.util.HashMap">
+		INSERT INTO apart.if_autopay_del(
+				comp_gb
+		  	,   dancode
+		  	,   dongcode
+		  	,   roomno
+		  	,   gojicode
+		  	,   accountno
+		  	,   admincode
+		  	,   bankname
+		  	,   depositname
+		  	,   reckind
+		  	,   recbank
+		  	,   reqdate
+		  	,   reqkind
+			,	deldate
+		  	,   row_input_date
+		  	,   row_input_emp_no
+		  	,   row_input_ip
+		  	,   row_update_date
+		  	,   row_update_emp_no
+		  	,   row_update_ip
+			)
+		VALUES
+		    <foreach collection="list" item="item" index="index" separator=",">
+		    (
+			    #{item.comp}
+		  	,	TRIM(#{item.dancode})
+		  	,   TRIM(#{item.dongcode})
+		  	,   #{item.roomno}
+		  	,   TRIM(#{item.gojicode})
+		  	,   TRIM(#{item.accountno})
+		  	,   TRIM(#{item.admincode})
+		  	,   TRIM(#{item.bankname})
+		  	,   TRIM(#{item.depositname})
+		  	, 	#{item.RecKind}
+		  	,   #{item.RecBank}
+		  	,   #{item.ReqDate}
+		  	,   #{item.ReqKind}
+			,	#{item.DelDate}::timestamp
+		  	,   now()
+		  	,   'Agent'
+		  	,   '1.0.0.0.0.0'
+		  	,   now()
+			,   'Agent'
+			,   '1.0.0.0.0.0'
+		)</foreach>
+		;
+	</insert>
+</mapper>

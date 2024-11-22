@@ -1,0 +1,41 @@
+
+“	java:S117-"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›ÚÑÓ8…À¥¤Š2J$b71957df-d62e-4923-9199-e5e748de2adf
+¼
+java:S1319Ş"sThe return type of this method should be an interface such as "Map" rather than the implementation "LinkedHashMap".(¤ È›ùÿÿÿÿ8‰À¥¤Š2J$bef92d12-9760-49fc-b66b-31f6e0d703f8
+·
+java:S1319è"sThe return type of this method should be an interface such as "Map" rather than the implementation "LinkedHashMap".(¼üÍ«8ŠÀ¥¤Š2J$9141bf47-8314-4749-bcbf-c42316a710d1
+„
+java:S3457/"AFormat specifiers should be used instead of string concatenation.(›çßª8šÀ¥¤Š2J$b5b536eb-0dfb-45a6-ae5c-bb5de2506f58
+~
+java:S11723"6Remove this unused method parameter "parameterObject".(ôÖÃ¯øÿÿÿÿ8œÀ¥¤Š2J$98ba41f1-0e4a-47a2-9e0f-c6e5fe75d5ef
+Œ
+java:S11344"DTake the required action to fix the issue indicated by this comment.(ü…€Îùÿÿÿÿ8 À¥¤Š2J$7015497a-9b98-4c76-af72-e39fc8edff29
+p
+java:S1905ó"'Remove this unnecessary cast to "List".(œÉêÒüÿÿÿÿ8ÒÀ¥¤Š2J$9dcb019a-28ac-4f86-9f57-46a8469ed7cd
+k
+java:S1905"'Remove this unnecessary cast to "List".(Œ³üñ8ÔÀ¥¤Š2J$549b7ca7-14e6-49f9-aa09-10748b57be66
+p
+java:S1905Œ"'Remove this unnecessary cast to "List".(úÖ…“üÿÿÿÿ8ØÀ¥¤Š2J$6f93db7b-3d74-4cf2-a6d2-92d6a8bce1b3
+p
+java:S1905™"'Remove this unnecessary cast to "List".(×È­ôùÿÿÿÿ8ÚÀ¥¤Š2J$c38809c6-8f27-496e-aca3-3b82984a3371
+k
+java:S1905 "'Remove this unnecessary cast to "List".(ìïú¹8ÜÀ¥¤Š2J$9a8a4870-8050-4579-b3a2-4d17b88ae7b8
+p
+java:S1905¤"'Remove this unnecessary cast to "List".(ØŒª«üÿÿÿÿ8ŞÀ¥¤Š2J$56b87e74-6f8a-4600-822e-55c990d932ac
+k
+java:S1905®"'Remove this unnecessary cast to "List".(¼¡ºÉ8ßÀ¥¤Š2J$afa61c45-fadc-4117-86b7-ca7e762422db
+p
+java:S1905¼"'Remove this unnecessary cast to "List".(½åŸ¾üÿÿÿÿ8áÀ¥¤Š2J$c3a5feb3-44f5-4efe-b455-cbd7b407e947
+p
+java:S1905Ç"'Remove this unnecessary cast to "List".(³¿‚Àøÿÿÿÿ8âÀ¥¤Š2J$bdf650ec-1f8d-4844-934b-3e6af1fdc5b5
+p
+java:S1905Ô"'Remove this unnecessary cast to "List".(úôşöùÿÿÿÿ8äÀ¥¤Š2J$3793e548-0396-4054-bb9f-dd26b2391875
+o
+java:S1905á"&Remove this unnecessary cast to "Map".(–ìø‡şÿÿÿÿ8æÀ¥¤Š2J$e06f9817-4dda-49cb-a84d-0de4ccae7389
+~
+java:S1128
+";Remove this unused import 'org.apache.commons.logging.Log'.(Å¼î²8êÀ¥¤Š2J$70160608-951b-4a49-a561-abe636666c72
+…
+java:S1128"BRemove this unused import 'org.apache.commons.logging.LogFactory'.(Ç„Í8ïÀ¥¤Š2J$1abd8f79-6468-4bdf-b869-a4a7899478e9
+{
+java:S1128"8Remove this unused import 'apps.framework.object.CmMap'.(“¬‹Ù8ïÀ¥¤Š2J$82accad7-74ff-444d-8fee-ed871937932c

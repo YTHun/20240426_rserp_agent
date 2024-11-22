@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="useGeneratedKeys" value="false"/>
+		<setting name="defaultExecutorType" value="REUSE"/>
+		<setting name="callSettersOnNulls" value="true"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="apps.framework.object.CmMap" alias="CmMap"/>
+		<typeAlias type="apps.framework.object.CmResMap" alias="CmResMap"/>
+	</typeAliases>
+
+	<typeHandlers>
+		<typeHandler handler="org.apache.ibatis.type.ClobTypeHandler" javaType="java.lang.String" jdbcType="CLOB"/>
+	</typeHandlers>
+
+	<plugins>
+		<plugin interceptor="apps.framework.interceptor.MybatisLogInterceptor"/>
+
+	</plugins>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="${POSTGRE_DB_DRIVER_CLASS}"/>
+				<property name="url" value="${POSTGRE_DB_URL}"/>
+				<property name="username" value="${POSTGRE_DB_USERNAME}"/>
+				<property name="password" value="${POSTGRE_DB_PASSWORD}"/>
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="apps/project/dao/autoreceipt/AutoReceipt_PostGresql_Dao.xml"/>
+		<mapper resource="apps/project/dao/autopay/IfAutoPay_PostGresql_Dao.xml"/>
+	</mappers>
+
+</configuration>

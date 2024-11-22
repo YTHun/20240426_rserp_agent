@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="IssAcctHis_PostGresql_Dao">
+
+	<!-- SELECT -->
+	<!-- INSERT -->
+	<insert id="IssAcctHis_PostGresql_Dao.insertIssAcct.insert" parameterType="CmMap">
+		INSERT INTO if_iss_acct	(	comp_gb
+							    ,   comp_code
+							    ,   bank_cd
+							    ,   acct_no
+							    ,   ib_type
+							    ,   subcomp_idno
+							    ,   depositor
+							    ,   acct_nickname
+							    ,   acct_pw
+							    ,   acct_fastid
+							    ,   acct_fastpw
+							    ,   acct_kind
+							    ,   client_gb
+							    ,   status
+							    ,   tstatus
+							    ,   wdate
+							    ,   udate
+							    ,   tdate
+								,   row_input_date
+								,   row_input_emp_no
+								,   row_input_ip
+	 								)
+							VALUES
+								<foreach collection="list" item="item" index="index" separator=",">
+							    (	#{item.comp_gb}
+                                ,   #{item.comp_code}
+                                ,   #{item.bank_cd}
+                                ,   #{item.acct_no}
+                                ,   #{item.ib_type}
+                                ,   #{item.subcomp_idno}
+                                ,   #{item.depositor}
+                                ,   #{item.acct_nickname}
+                                ,   #{item.acct_pw}
+                                ,   #{item.acct_fastid}
+                                ,   #{item.acct_fastpw}
+                                ,   #{item.acct_kind}
+                                ,   #{item.client_gb}
+                                ,   #{item.status}
+                                ,   #{item.tstatus}
+                                ,   #{item.wdate}::timestamp
+                                ,   #{item.udate}::timestamp
+                                ,   #{item.tdate}::timestamp
+								,   now()
+								,   'Agent'
+								,   '1.0.0.0.0.0'
+								)
+								</foreach>
+	</insert>
+
+	<!-- UPDATE -->
+
+	<!-- DELETE -->
+	<delete id="IssAcctHis_PostGresql_Dao.deleteIssAcct.delete" parameterType="CmMap">
+		DELETE
+		FROM 	apart.if_iss_acct
+		;
+	</delete>
+	
+	<!-- INSERT -->
+	<insert id="IssAcctHis_PostGresql_Dao.insertIssAcctHis.insert" parameterType="CmMap">
+		INSERT INTO if_iss_acct_his(bank_cd
+					            ,   acct_no
+					            ,   acct_his_seq
+					            ,   acct_txday
+					            ,   acct_txtime
+					            ,   his_jeokyo1
+					            ,   his_jeokyo2
+					            ,   his_branch1
+					            ,   his_branch2
+					            ,   his_bigo
+					            ,   inout_gb
+					            ,   currency_cd
+					            ,   tx_amt
+					            ,   tx_cur_bal
+					            ,   his_memo
+					            ,   his_hand_reg
+					            ,   his_hand_regdt
+					            ,   acct_his_dupseq
+					            ,   his_gear_no
+					            ,   bat_handreg
+					            ,   bat_acct_txday
+					            ,   bat_acct_time
+					            ,   subcomp_idno
+					            ,   client_gb
+								,   wdate
+								,   row_input_date
+								,   row_input_emp_no
+								,   row_input_ip
+	 								)
+							VALUES
+								<foreach collection="list" item="item" index="index" separator=",">
+							    (	#{item.bank_cd}
+                                ,   #{item.acct_no}
+                                ,   #{item.acct_his_seq}
+                                ,   #{item.acct_txday}
+                                ,   #{item.acct_txtime}
+                                ,   #{item.his_jeokyo1}
+                                ,   #{item.his_jeokyo2}
+                                ,   #{item.his_branch1}
+                                ,   #{item.his_branch2}
+                                ,   #{item.his_bigo}
+                                ,   #{item.inout_gb}
+                                ,   #{item.currency_cd}
+                                ,   #{item.tx_amt}::numeric
+                                ,   #{item.tx_cur_bal}::numeric
+                                ,   #{item.his_memo}
+                                ,   #{item.his_hand_reg}
+                                ,   #{item.his_hand_regdt}
+                                ,   #{item.acct_his_dupseq}::numeric
+                                ,   #{item.his_gear_no}
+                                ,   #{item.bat_handreg}
+                                ,   #{item.bat_acct_txday}
+                                ,   #{item.bat_acct_time}
+                                ,   #{item.subcomp_idno}
+                                ,   #{item.client_gb}
+                                ,   #{item.wdate}::timestamp
+								,   now()
+								,   'Agent'
+								,   '1.0.0.0.0.0'
+								)
+								</foreach>
+	</insert>
+
+	<!-- UPDATE -->
+
+	<!-- DELETE -->
+	<delete id="IssAcctHis_PostGresql_Dao.deleteIssAcctHis.delete" parameterType="CmMap">
+		DELETE
+		FROM 	apart.if_iss_acct_his
+		WHERE	acct_txday	= TO_CHAR(now()::date-1, 'YYYYMMDD');
+		;
+	</delete>
+
+</mapper>

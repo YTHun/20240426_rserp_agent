@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="MstVa_MsSql_Dao">
+
+	<!-- SELECT -->
+	<select id="MstVa_MsSql_Dao.getMstVaDanCnt.select" parameterType="CmMap" resultType="Integer">
+		SELECT	count(1)	as cnt
+		FROM	MSTvaDANCODE
+		WHERE	rflag	= #{rflag}
+		;
+	</select>
+	
+	<!-- SELECT -->
+	<select id="MstVa_MsSql_Dao.getMstVaDanGroup.select" parameterType="CmMap" resultType="CmResMap">
+		SELECT	DISTINCT dancode
+		FROM	MSTvaDANCODE
+		WHERE	rflag	= #{rflag}
+		;
+	</select>
+	<!-- SELECT -->
+	<select id="MstVa_MsSql_Dao.getMstVaDan.select" parameterType="CmMap" resultType="CmResMap">
+		SELECT  dancode
+		    ,   bankcode
+		    ,   bankSn
+		    ,   srvname
+		    ,   roomtot
+		    ,   rent
+		    ,   apply_date
+		    ,   pb_ucode
+		    ,   agent
+		    ,   its_auto
+		FROM    MSTvaDANCODE
+		WHERE	rflag	= '1'
+		ORDER BY dancode, bankcode
+		OFFSET #{strrows} ROWS FETCH NEXT #{endrows} ROWS ONLY
+		;
+	</select>
+	
+	<!-- UPDATE -->
+	<update id="MstVa_MsSql_Dao.updateMSTvaDANCODEBf.update" parameterType="CmMap">
+		UPDATE	MSTvaDANCODE SET rflag = '0'
+		WHERE	rflag	= '1'
+	</update>
+	
+	<update id="MstVa_MsSql_Dao.updateMSTvaDANCODE.update" parameterType="CmMap">
+		UPDATE	MSTvaDANCODE SET rflag = '1'
+		WHERE	rflag	= #{rflag}
+	</update>
+	
+	<update id="MstVa_MsSql_Dao.updateMSTvaDANCODEend.update" parameterType="CmMap" >
+		UPDATE	MSTvaDANCODE SET rflag = '9'
+	    WHERE	rflag	= '1'
+  		;
+	</update>
+	
+	<!-- DELETE -->
+	<delete id="MstVa_MsSql_Dao.deleteMSTvaDANCODE.delete" parameterType="CmMap" >
+		<foreach collection="list" item="item" index="index" separator=",">
+			DELETE
+			FROM 	MSTvaDANCODE
+			WHERE	dancode	= #{item.dancode}
+			;
+			DELETE
+			FROM 	MSTvaMEMBER
+			WHERE	dancode	= #{item.dancode}
+			;
+		</foreach>
+	</delete>
+	
+	<!-- SELECT -->
+	<select id="MstVa_MsSql_Dao.getMstVaMemCnt.select" parameterType="CmMap" resultType="Integer">
+		SELECT	count(1)	as cnt
+		FROM	MSTvaDANCODE a
+		    INNER JOIN  MSTvaMEMBER b
+		            ON  a.dancode   = b.dancode
+		           AND  a.bankcode  = b.bankcode
+		WHERE	a.rflag	= '1'
+		;
+	</select>
+	
+	<!-- SELECT -->
+	<select id="MstVa_MsSql_Dao.getMstVaMem.select" parameterType="CmMap" resultType="CmResMap">
+		SELECT  b.dancode
+		    ,   b.dongcode
+		    ,   b.roomno
+		    ,   b.bankcode
+		    ,   b.vaccount
+		    ,   b.usedate
+		    ,   b.send
+		FROM	MSTvaDANCODE a
+		    INNER JOIN  MSTvaMEMBER b
+		            ON  a.dancode   = b.dancode
+		           AND  a.bankcode  = b.bankcode
+		WHERE	a.rflag	= '1'
+		ORDER BY b.dancode, b.dongcode, b.roomno, b.bankcode, b.vaccount
+		OFFSET #{strrows} ROWS FETCH NEXT #{endrows} ROWS ONLY
+	</select>
+
+	<!-- INSERT -->
+	<insert id="MstVa_MsSql_Dao.temp.insert" parameterType="CmMap">
+	</insert>
+
+	<!-- UPDATE -->
+	<!-- DELETE -->
+	
+</mapper>

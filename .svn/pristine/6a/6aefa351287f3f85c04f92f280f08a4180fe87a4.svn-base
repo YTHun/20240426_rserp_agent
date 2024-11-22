@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="CmAgentDao">
+
+  <!-- SELECT -->
+   <select id="CmAgentDao.selectDbVersion" parameterType="CmMap" resultType="CmResMap">
+		SELECT VERSION()
+   </select>
+
+
+  <!-- INSERT -->
+
+
+  <!-- UPDATE -->
+
+
+  <!-- DELETE -->
+
+
+
+</mapper>

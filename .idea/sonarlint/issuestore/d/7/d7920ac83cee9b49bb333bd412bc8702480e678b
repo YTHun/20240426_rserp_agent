@@ -1,0 +1,12 @@
+
+v
+java:S1149—"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(í…Ò‰
+6
+java:S2326	"K is not used in the class.(ù˜Ô ÿÿÿÿÿ
+6
+java:S2326	"V is not used in the class.(ù˜Ô ÿÿÿÿÿ
+Q	java:S125"<This block of commented-out lines of code should be removed.(˜ÉÒš
+<
+java:S1168w"&Return an empty array instead of null.(¥¹ï
+`
+java:S1134¥"DTake the required action to fix the issue indicated by this comment.(‹íâ½øÿÿÿÿ

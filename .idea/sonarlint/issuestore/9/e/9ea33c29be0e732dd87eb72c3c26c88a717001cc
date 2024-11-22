@@ -1,0 +1,18 @@
+
+¡
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(í…ëÂüÿÿÿÿ8¶‹ÈŒ2J$f4ba44f4-190a-458b-a24f-f6c2c946c8c4
+}
+java:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8·‹ÈŒ2J$42fc907e-8100-4da8-a707-9d01080ae86a
+}
+java:S11418"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8¸‹ÈŒ2J$7354e313-faa4-4a6e-9749-62e25bb9689d
+Š
+java:S1192!"GDefine a constant instead of duplicating this literal "status" 5 times.(óÓ8ù¬Ú Œ2J$9390373f-d300-4c23-9be5-6b5df3a460f0
+r
+java:S2387"/"logger" is the name of a field in "CmService".(ÖËƒÔ8º‹ÈŒ2J$4aa18558-cb62-44f1-a413-13fe3f8e1501
+š
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ú±‚‡üÿÿÿÿ8¼‹ÈŒ2J$8e976287-c70b-4595-90c6-73c1857d3890
+s
+java:S1481"0Remove this unused "updateDatas" local variable.(Ö÷ª¬8½‹ÈŒ2J$af07cb99-42b5-4b17-b819-8ceb0bb36211
+~	java:S125@"<This block of commented-out lines of code should be removed.(ú×²8Á‹ÈŒ2J$06afa36a-c464-4d6b-be31-48aa49f94482
+z
+java:S1135?"2Complete the task associated to this TODO comment.(ªºÂ¹úÿÿÿÿ8Á‹ÈŒ2J$6287b440-7187-4631-a4e8-ae07c329d319

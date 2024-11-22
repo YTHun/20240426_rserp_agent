@@ -1,0 +1,363 @@
+package apps.framework.dao;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import apps.framework.object.CmMap;
+import apps.framework.object.CmResMap;
+
+
+@SuppressWarnings("rawtypes")
+public class CmParentDao {
+	
+	protected Logger logger = LogManager.getLogger(this.getClass());
+	
+	@Resource(name="sqlSessionFactory")
+    private SqlSessionFactory sqlSessionFactory;
+	
+	@PostConstruct
+	public void init(){
+		setSqlSessionFactory(sqlSessionFactory);
+	}
+	
+	public void setSqlSessionFactory(SqlSessionFactory sqlSession) {
+		this.sqlSessionFactory = sqlSession;
+	}
+	
+	public SqlSession openSession() {
+		return sqlSessionFactory.openSession(false);
+	}
+
+	
+
+	private void printstatementName(String sql_id) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("$$$$ SQL ID : " + sql_id);
+		}
+	}
+	
+	private void setCommonParameterSetting(Object parameterObject) {
+		// FIXME: 빈칸 채우기
+	}
+	
+	public Object selectOne(SqlSession session, String statementName) {
+		this.printstatementName(statementName);
+		return session.selectOne(statementName);
+	}
+	
+	
+	public Object selectOne(SqlSession session, String statementName, Object parameterObject) {
+		this.printstatementName(statementName);
+		this.setCommonParameterSetting(parameterObject);
+		return session.selectOne(statementName, parameterObject);
+	}
+	
+	public List selectList(SqlSession session, String statementName) {
+		this.printstatementName(statementName);
+		return session.selectList(statementName);
+	}
+	
+
+	public List selectList(SqlSession session, String statementName, Object parameterObject) {
+		this.printstatementName(statementName);
+		this.setCommonParameterSetting(parameterObject);
+		return session.selectList(statementName, parameterObject);
+	}
+	
+	
+	public List selectList(SqlSession session, String statementName, Object parameterObject, RowBounds rowBounds) {
+		this.printstatementName(statementName);
+		this.setCommonParameterSetting(parameterObject);
+		return session.selectList(statementName, parameterObject, rowBounds);
+	}
+	
+	public Map selectMap(SqlSession session, String statementName, String mapKey) {
+		this.printstatementName(statementName);
+		return session.selectMap(statementName, mapKey);
+	}
+	
+
+	public Map selectMap(SqlSession session, String statementName, Object parameterObject, String mapKey) {
+		this.printstatementName(statementName);
+		this.setCommonParameterSetting(parameterObject);
+		return session.selectMap(statementName, parameterObject, mapKey);
+	}
+	
+	
+	public Map selectMap(SqlSession session, String statementName, Object parameterObject, String mapKey, RowBounds rowBounds) {
+		this.printstatementName(statementName);
+		this.setCommonParameterSetting(parameterObject);
+		return session.selectMap(statementName, parameterObject, mapKey, rowBounds);
+	}
+	
+	
+	
+	/**
+	 * insert
+	 * @param statementName
+	 * @return
+	 */
+	public int insert(SqlSession session, String statementName) {
+		this.printstatementName(statementName);
+		return session.insert(statementName);
+	}
+	
+
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @return
+	 */
+	public int insert(SqlSession session, String statementName, Object parameterObject) {
+		this.printstatementName(statementName);
+		this.setCommonParameterSetting(parameterObject);
+		return session.insert(statementName, parameterObject);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @return
+	 */
+	public int update(SqlSession session, String statementName) {
+		this.printstatementName(statementName);
+		return session.update(statementName);
+	}
+
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @return
+	 */
+	public int update(SqlSession session, String statementName, Object parameterObject) {
+		this.printstatementName(statementName);
+		this.setCommonParameterSetting(parameterObject);
+		return session.update(statementName, parameterObject);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @return
+	 */
+	public int delete(SqlSession session, String statementName) {
+		this.printstatementName(statementName);
+		return session.delete(statementName);
+	}
+	
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @return
+	 */
+	public int delete(SqlSession session, String statementName, Object parameterObject) {
+		this.printstatementName(statementName);
+		this.setCommonParameterSetting(parameterObject);
+		return session.delete(statementName, parameterObject);
+	}
+	
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @return
+	 */
+	public int getCount(SqlSession session, String statementName) {
+		this.printstatementName(statementName);
+		return (Integer)this.selectOne(session, statementName);
+	}
+	
+
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @return
+	 */
+	public int getCount(SqlSession session, String statementName, Object parameterObject) {
+		return (Integer)this.selectOne(session, statementName, parameterObject);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @return
+	 */
+	public CmResMap getObject(SqlSession session, String statementName) {
+		return (CmResMap) this.selectOne(session, statementName);
+	}
+	
+
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @return
+	 */
+	public CmResMap getObject(SqlSession session, String statementName, Object parameterObject) {
+		return (CmResMap) this.selectOne(session, statementName, parameterObject);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @return
+	 */
+	public LinkedHashMap  getLHObject(SqlSession session, String statementName) {
+		return (LinkedHashMap ) this.selectOne(session, statementName);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @return
+	 */
+	public LinkedHashMap  getLHObject(SqlSession session, String statementName, Object parameterObject) {
+		return (LinkedHashMap ) this.selectOne(session, statementName, parameterObject);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CmResMap> getList(SqlSession session, String statementName) {
+		return (List<CmResMap>)this.selectList(session, statementName);
+	}
+	
+
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @param skipResults
+	 * @param maxResults
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CmResMap> getList(SqlSession session, String statementName, RowBounds rowBounds) {
+		return (List<CmResMap>)this.selectList(session, statementName, rowBounds);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CmResMap> getList(SqlSession session, String statementName, Object parameterObject) {
+		return (List<CmResMap>)this.selectList(session, statementName, parameterObject);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @param skipResults
+	 * @param maxResults
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CmResMap> getList(SqlSession session, String statementName, Object parameterObject, RowBounds rowBounds) {		
+		return (List<CmResMap>)this.selectList(session, statementName, parameterObject, rowBounds);
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<String> getSList(SqlSession session, String statementName, Object parameterObject) {
+		return (List<String>)this.selectList(session, statementName, parameterObject);
+	}
+	@SuppressWarnings("unchecked")
+	public List<String> getSList(SqlSession session, String statementName, Object parameterObject, RowBounds rowBounds) {		
+		return (List<String>)this.selectList(session, statementName, parameterObject, rowBounds);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<LinkedHashMap> getLHList(SqlSession session, String statementName) {
+		return (List<LinkedHashMap>)this.selectList(session, statementName);
+	}
+	
+
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @param skipResults
+	 * @param maxResults
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<LinkedHashMap> getLHList(SqlSession session, String statementName, RowBounds rowBounds) {
+		return (List<LinkedHashMap>)this.selectList(session, statementName, rowBounds);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<LinkedHashMap> getLHList(SqlSession session, String statementName, Object parameterObject) {
+		return (List<LinkedHashMap>)this.selectList(session, statementName, parameterObject);
+	}
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @param skipResults
+	 * @param maxResults
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<LinkedHashMap> getHLList(SqlSession session, String statementName, Object parameterObject, RowBounds rowBounds) {		
+		return (List<LinkedHashMap>)this.selectList(session, statementName, parameterObject, rowBounds);
+	}
+	
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @param parameterObject
+	 * @param keyProperty
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Map<String, CmResMap> getMap(SqlSession session, String statementName, Object parameterObject, String keyProperty) {
+		return (Map<String, CmResMap>)this.selectMap(session, statementName, parameterObject, keyProperty);
+	}
+		
+	public String getString(SqlSession session, String statementName, Object parameterObject) {
+		return (String)this.selectOne(session, statementName, parameterObject);
+	}
+	
+	public String getString(SqlSession session, String statementName) {
+		return (String)this.selectOne(session, statementName);
+	}
+}

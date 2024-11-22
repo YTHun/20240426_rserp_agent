@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="IssAcctHis_MsSql_Dao">
+
+	<!-- SELECT -->
+	<select id="IssAcctHis_MsSql_Dao.getIssAcctHisCnt.select" parameterType="CmMap" resultType="Integer">
+		SELECT	count(1)	as cnt
+		FROM	Distributed_ISS_ACCT_HIS
+		
+	</select>
+	
+	<!-- SELECT -->
+	<select id="IssAcctHis_MsSql_Dao.getIssAcctHis.select" parameterType="CmMap" resultType="CmResMap">
+		SELECT  bank_cd
+		    ,   master.dbo.xdb_fsdec('normal', acct_no) as acct_no
+		    ,   acct_his_seq
+		    ,   acct_txday
+		    ,   acct_txtime
+		    ,   his_jeokyo1
+		    ,   his_jeokyo2
+		    ,   his_branch1
+		    ,   his_branch2
+		    ,   his_bigo
+		    ,   inout_gb
+		    ,   currency_cd
+		    ,   tx_amt
+		    ,   tx_cur_bal
+		    ,   his_memo
+		    ,   his_hand_reg
+		    ,   his_hand_regdt
+		    ,   acct_his_dupseq
+		    ,   his_gear_no
+		    ,   bat_handreg
+		    ,   bat_acct_txday
+		    ,   bat_acct_time
+		    ,   subcomp_idno
+		    ,   client_gb
+		    ,   wdate
+		FROM    Distributed_ISS_ACCT_HIS
+		ORDER	BY BANK_CD, ACCT_NO, ACCT_HIS_SEQ, ACCT_TXDAY
+		OFFSET #{strrows} ROWS FETCH NEXT #{endrows} ROWS ONLY
+	</select>
+
+	<!-- INSERT -->
+	<insert id="IssAcctHis_MsSql_Dao.temp.insert" parameterType="CmMap">
+	</insert>
+
+	<!-- UPDATE -->
+	<!-- DELETE -->
+
+
+</mapper>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ezREMS v3.0 by ZEONS, Inc.  http://www.ezrems.com   http://www.zeons.co.kr  -->
+
+<mapper namespace="MstVa_PostGresql_Dao">
+
+	<!-- SELECT -->
+	<!-- INSERT -->
+	<insert id="MstVa_PostGresql_Dao.insertMstVa.insert" parameterType="CmMap">
+		INSERT INTO if_mstvadancode	(	dancode
+								    ,   bankcode
+								    ,   bankSn
+								    ,   srvname
+								    ,   roomtot
+								    ,   rent
+								    ,   apply_date
+								    ,   pb_ucode
+								    ,   agent
+								    ,   its_auto
+									,   row_input_date
+									,   row_input_emp_no
+									,   row_input_ip
+		                                )
+								VALUES
+									<foreach collection="list" item="item" index="index" separator=",">
+								    (	TRIM(#{item.dancode})
+	                                ,   #{item.bankcode}
+	                                ,   #{item.bankSn}
+	                                ,   #{item.srvname}
+	                                ,   #{item.roomtot}::numeric
+	                                ,   #{item.rent}
+	                                ,   #{item.apply_date}
+	                                ,   #{item.pb_ucode}
+	                                ,   #{item.agent}
+	                                ,   #{item.its_auto}
+									,   now()
+									,   'Agent'
+									,   '1.0.0.0.0.0'
+									)
+									</foreach>
+	</insert>
+
+	<!-- UPDATE -->
+
+	<!-- DELETE -->
+	<delete id="MstVa_PostGresql_Dao.deleteMstVaDan.delete" parameterType="CmMap">
+		<foreach collection="list" item="item" index="index" separator=",">
+			DELETE
+			FROM 	apart.if_mstvadancode
+			WHERE	dancode	= TRIM(#{item.dancode})
+			;
+			DELETE
+			FROM 	apart.if_mstvamember
+			WHERE	dancode	= TRIM(#{item.dancode})
+			;
+		</foreach>
+	</delete>
+	
+	<!-- INSERT -->
+	<insert id="MstVa_PostGresql_Dao.insertMstVaMem.insert" parameterType="CmMap">
+		INSERT INTO if_mstvamember(	dancode
+					            ,   dongcode
+					            ,   roomno
+					            ,   bankcode
+					            ,   vaccount
+					            ,   usedate
+					            ,   send
+								,   row_input_date
+								,   row_input_emp_no
+								,   row_input_ip
+	 								)
+							VALUES
+								<foreach collection="list" item="item" index="index" separator=",">
+							    (	TRIM(#{item.dancode})
+                                ,   TRIM(#{item.dongcode})
+                                ,   #{item.roomno}::numeric
+                                ,   #{item.bankcode}
+                                ,   #{item.vaccount}
+                                ,   #{item.usedate}
+                                ,   #{item.send}
+								,   now()
+								,   'Agent'
+								,   '1.0.0.0.0.0'
+								)
+								</foreach>
+	</insert>
+
+	<!-- UPDATE -->
+
+	<!-- DELETE -->
+	<delete id="MstVa_PostGresql_Dao.deleteMstVaHisMem.delete" parameterType="CmMap">
+	</delete>
+
+</mapper>

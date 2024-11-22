@@ -1,0 +1,11 @@
+
+k
+java:S2387)"/"logger" is the name of a field in "CmService".(üëÃJ$63b328bb-3111-4c57-a963-87fcf56f391a
+½
+java:S1186:"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(áÎ©ûJ$5cf15316-e8a3-4595-9d12-d70d781867ab
+–
+java:S1450/"ZRemove the "jettyServer" field and declare it as a local variable in the relevant methods.(¸Ÿ¸ïJ$c4d65268-99a9-46ea-af47-a4da2b23c2fe
+
+java:S1450,"QRemove the "sf" field and declare it as a local variable in the relevant methods.(’Ğ‹J$293f541f-0be6-40e4-bfb7-648790bab42a
+
+java:S1128"HRemove this unused import 'apps.project.servlet.autopay.AutoPayServlet'.(É„ÓÈıÿÿÿÿ8èÕÊº2J$d00b04e7-27cd-4b71-b37c-f5183efdf39e

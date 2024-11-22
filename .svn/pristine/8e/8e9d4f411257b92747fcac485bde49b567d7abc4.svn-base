@@ -1,0 +1,88 @@
+package apps.project.service.mstva;
+
+import apps.framework.object.CmMap;
+import apps.framework.object.CmResMap;
+import apps.framework.service.CmService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.session.SqlSession;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@SuppressWarnings("rawtypes")
+public class MstVaService extends CmService {
+
+	private static final Log logger = LogFactory.getLog(MstVaService.class);
+
+	public List<CmResMap> transferDataFromMsSqlToPostGresql(CmMap reqVo) {
+		// dataerp postgresql
+		SqlSession postGresqlSession = openSession();
+		// 동서 mssql
+		SqlSession msSqlSession     = openSession2();
+		List<CmResMap> resultList   = new ArrayList<CmResMap>();
+        CmMap selectRows = new CmMap();
+
+		try {
+			// 동서 IssAcctHis 데이터
+
+            cmDao.delete(postGresqlSession, "MstVa_PostGresql_Dao.deleteMstVaDan.delete", reqVo);
+            int getCount = cmDao2.getCount(msSqlSession, "MstVa_MsSql_Dao.getMstVaDanCnt.select", reqVo);
+
+            // 500건식 나눠서
+            int i = 1;
+            while (((i-1)*1000) < getCount){
+                try {
+                    selectRows.put("strrows" , (i - 1)*1000);
+                    selectRows.put("endrows" , 1000);
+
+                    List<CmResMap> autoPayDatas = cmDao2.getList(msSqlSession, "MstVa_MsSql_Dao.getMstVaDan.select", selectRows);
+                    cmDao.insert(postGresqlSession, "MstVa_PostGresql_Dao.insertMstVa.insert", autoPayDatas);
+
+                    //1000건씩 Commit
+                    postGresqlSession.commit();
+                    msSqlSession.commit();
+                } catch (Exception e) {
+                    logger.error(e);
+                    rollBack(postGresqlSession, msSqlSession);
+                }
+                i++;
+            }
+
+            cmDao.delete(postGresqlSession, "MstVa_PostGresql_Dao.deleteMstVaHisMem.delete", reqVo);
+                getCount = cmDao2.getCount(msSqlSession, "MstVa_MsSql_Dao.getMstVaMemCnt.select", reqVo);
+
+            // 500건식 나눠서
+                i = 1;
+            while (((i-1)*1000) < getCount){
+                try {
+                    selectRows.put("strrows" , (i - 1)*1000);
+                    selectRows.put("endrows" , 1000);
+
+                    List<CmResMap> autoPayDatas = cmDao2.getList(msSqlSession, "MstVa_MsSql_Dao.getMstVaMem.select", selectRows);
+                    cmDao.insert(postGresqlSession, "MstVa_PostGresql_Dao.insertMstVaMem.insert", autoPayDatas);
+
+                    //1000건씩 Commit
+                    postGresqlSession.commit();
+                    msSqlSession.commit();
+                } catch (Exception e) {
+                    logger.error(e);
+                    rollBack(postGresqlSession, msSqlSession);
+                }
+                i++;
+            }
+
+		} catch (Exception e) {
+			logger.error(e);
+		} finally {
+			if (null != postGresqlSession) {
+				postGresqlSession.close();
+			}
+			if (null != msSqlSession) {
+				msSqlSession.close();
+			}
+		}
+
+		return resultList;
+	}
+}

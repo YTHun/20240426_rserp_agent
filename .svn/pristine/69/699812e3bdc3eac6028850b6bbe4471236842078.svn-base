@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d %-5p %C - %m%n"/>
+    </Console>
+  </Appenders>
+  
+  
+  <Loggers>
+    <Logger name="apps" level="debug"/>
+    
+    <Logger name="org.springframework.core" level="info"/>
+    
+    <Logger name="org.springframework.beans" level="info"/>
+    
+    <Logger name="org.springframework.context" level="info"/>
+    
+    <Logger name="java.sql" level="debug"/>
+    
+    <Logger name="apps.framework.interceptor.MybatisLogInterceptor" level="debug"/>
+    
+    <Root level="debug">
+      <AppenderRef ref="console"/>
+    </Root>
+  </Loggers>
+  
+</Configuration>
+
